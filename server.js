@@ -36,20 +36,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-// simple route
+/* simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
+  });*/
+
+// View engine setup
+app.set('view engine', 'ejs');
+
+app.get("/", (req, res) => {
+    res.render("home", { title: "Home" });
   });
 
 
 // Synchronisation avec la database
-const db = require('./app/models')
+const db = require('./models')
 db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
   });
 
   // import des routes 
-require("./app/routes/turorial.routes")(app);
+require("./routes/turorial.routes")(app);
 
 // Definition du port d'ecoute
 const PORT = process.env.PORT || 8080;
