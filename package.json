@@ -1,0 +1,34 @@
+{
+  "name": "api_map",
+  "version": "1.0.0",
+  "description": "API for mapping",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elie-Mendy/API_MAP.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sequelize",
+    "mysql",
+    "rest",
+    "api"
+  ],
+  "author": "MENDY Elie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elie-Mendy/API_MAP/issues"
+  },
+  "homepage": "https://github.com/Elie-Mendy/API_MAP#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
+}
