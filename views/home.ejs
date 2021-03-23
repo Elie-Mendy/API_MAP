@@ -1,10 +1,61 @@
 
 <html>
 <head>
-    <title>res.render() Demo</title>
+    <title>API_Maping</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
 </head>
 <body>
-    <h2>Render Function Demo !!</h2>
-    <p>Putin page de test reussi!!</p>
+    <h1>Sites de roulages PSA</h1>
+    
+    <div class="container">
+
+        <div class="list">
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker"" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+            <div class="item js-marker" data-lat="48.6065899" data-lng="0.9152175" data-name="La ferté Vidame">
+                <img src="https://via.placeholder.com/400x260" alt="just a placeholder">
+                <h4>Site de roulage de la ferté vidame</h4>
+                <p>une description du site</p>
+            </div>
+
+        </div>
+
+        <div class="map" id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="../javascript/map.js"></script>
 </body>
 </html

@@ -43,6 +43,8 @@ app.get("/", (req, res) => {
 
 // View engine setup
 app.set('view engine', 'ejs');
+// ajout des contenu static --> css
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
     res.render("home", { title: "Home" });
