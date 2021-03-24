@@ -37,17 +37,7 @@ class LeafletMap {
         this.bounds.push(point)
 
         // creation de la popup
-        L.popup({
-            autoClose : false,
-            closeOnEscapeKey : false,
-            closeOnclick: false,
-            closeButton: false,
-            className: 'marker',
-            maxwidth: 400
-        })
-          .setLatLng(point)  
-          .setContent(name)
-          .openOn(this.map)
+        return new LeafletMarker(point, name, this.map)
     }
 
 
@@ -57,42 +47,112 @@ class LeafletMap {
     
 }
 
+
+
+
+
+class LeafletMarker {
+    constructor (point, name, map) {
+        this.name = name
+        this.popup = L.popup({
+            autoClose : false,
+            closeOnEscapeKey : false,
+            closeOnClick: false,
+            closeButton: false,
+            className: 'marker',
+            maxwidth: 400
+        })
+            .setLatLng(point)  
+            .setContent(name)
+            .openOn(map)
+    }
+
+
+    setActive () {
+        this.popup.getElement().classList.add('is-active')
+    }
+
+    unsetActive () {
+        this.popup.getElement().classList.remove('is-active')
+    }
+
+
+    addEventListener (event, cb) {
+        this.popup.getElement().addEventListener(event, cb)
+    }
+
+
+    setContent (name) {
+        this.popup.setContent(name)
+        this.popup.getElement().classList.add('is-expended')
+        this.popup.update()
+        
+    }
+
+    resetContent() {
+        this.popup.setContent(this.name)
+        this.popup.getElement().classList.remove('is-expended')
+        this.popup.update()
+    }
+
+}
+
+
+
 const initMap = async function () {
     // initialisation de la map
     let map = new LeafletMap()
+    let activeMarker = null
+    let hoverMarker = null
+    
     await map.load($map)
     
     // création des markers
     Array.from(document.querySelectorAll('.js-marker')).forEach((item) => {
-        map.addMarker(item.dataset.lat, item.dataset.lng, item.dataset.name)
+        
+        // ajout d'un marker sur la map
+        let marker = map.addMarker(item.dataset.lat, item.dataset.lng, item.dataset.name)
+        
+        // ajout des listener
+        item.addEventListener('mouseover', function () {
+
+            // suppression de la surbrillance du marqueur précédent
+            if (hoverMarker !== null){
+                hoverMarker.unsetActive()
+            }
+
+            // activation de la surbrillance 
+            // du marker présent
+            marker.setActive()
+
+            // indication pour la suppression de 
+            // surbrillance si changement de marker
+            hoverMarker = marker
+        })
+
+        item.addEventListener('mouseleave', function () {
+            if (hoverMarker !== null){
+                hoverMarker.unsetActive()
+            } 
+        })
+        
+        marker.addEventListener('click', function () {
+            if (activeMarker !== null){
+                activeMarker.resetContent()
+            } 
+            marker.setContent(item.innerHTML)
+            activeMarker = marker
+        })
     })
+
 
     // centrage de la map par rapport aux marqueurs 
     map.center()
     
-    // effet de surbrillance sur les popup
-    // 
+
+    
 }
 
 if ($map !== null) {
     initMap()
 }
-
-/*
-// instanciation de la map
-let map = L.map('map').setView([51.505, -0.09], 13);
-
-//L.tileLayer('//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {    // pour openstreet map 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoiZW1lbmR5IiwiYSI6ImNrbW1sbGM0cjA4c2QydnBnNjZhMjBjMmkifQ.3FwCAihceCR0e79QAVUjxg'
-}).addTo(map);
-
-L.popup()
-    .setLatLng([51.505, -0.09])
-    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-    .openOn(map) */
